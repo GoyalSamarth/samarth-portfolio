@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { motion } from "framer-motion";
+import { Menu, X, MousePointerClick } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
     {title: "About", path: "#about"},
@@ -31,94 +31,101 @@ const Navbar = () => {
             });
         }
 
-        // Close mobile menu after clicking
         closeNav();
     }
 
-    const menuVariants = {
-        open: {
-            x:0,
+    const linkVariants = {
+        hidden: { opacity: 0, x: 50 },
+        visible: { 
+            opacity: 1, 
+            x: 0,
             transition: {
-                stiffness: 20,
-                damping:15
-            }
-        }, 
-        closed:{
-            x:'-100%',
-            transition: {
-                stiffness: 20,
-                damping: 15
+                type: "spring",
+                stiffness: 300
             }
         }
     }
  
     return (
-        <div className="text-white/70 pt-6 bg-black"> 
-            <div className="hidden md:flex items-center px-4 py-2 mx-auto max-w-[400px]">
-                <ul className="flex flex-row p-4 space-x-8">
+        <nav className="relative w-full bg-black bg-gradient-to-b via-[#2B1942] to-transparent">
+            <div className="container mx-auto max-w-[400px] flex justify-center items-center px-4 py-4">
+                {/* Desktop Navigation */}
+                <div className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link, index) => (
-                        <li key={index}>
-                            <a 
-                                href={link.path} 
-                                onClick={handleScroll}
-                                className="cursor-pointer"
-                            >
-                                <p>{link.title}</p>
-                            </a>
-                        </li>
-                    ))}
-
-                    <li>
-                        <a 
-                            href="#contact" 
+                        <motion.a 
+                            key={index}
+                            href={link.path} 
                             onClick={handleScroll}
-                            className="group cursor-pointer"
-                        > 
-                            <h1 className="text-lg font-bold text-white/70 cursor-pointer"> Contact Me</h1>
-                            <div className="relative">
-                                <div className="absolute w-2/3 h-1 transition-all duration-300 ease-out bg-orange-800 rounded-full group-hover:w-full">
-                                    <div className="mt-1 absolute w-1/3 h-1 transition-all duration-300 ease-out bg-orange-600 rounded-full group-hover:w-full"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div onClick={toggleNav} className="md:hidden absolute top-5 right-5 border rounded text-white/70 border-white/70 p-2 z-50">
-                {nav ? <AiOutlineClose size={30}/> : <AiOutlineMenu size={30}/>}
-            </div>
-
-            <motion.div 
-                initial={false}
-                animate={nav ?'open' : 'closed'}
-                variants={menuVariants}
-                className="fixed left-0 top-0 w-full z-40 bg-black/90 "
-            >
-                <ul className="text-4xl font-semibold my-24 text-center space-y-4-8">
-                    {navLinks.map((link,index) => (
-                        <li key={index} className="my-8">
-                            <a 
-                                href={link.path} 
-                                onClick={handleScroll}
-                                className="cursor-pointer"
-                            >
-                                {link.title}
-                            </a>
-                        </li>
-                    ))}
-                    <li>
-                        <a 
-                            href="#contact" 
-                            onClick={handleScroll}
-                            className="cursor-pointer"
+                            className="text-white/70 hover:text-[#E48A57] transition-colors group"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                         >
-                            Contact Me
-                        </a>
-                    </li>
-                </ul>
-            </motion.div>
-        </div>
+                            {link.title}
+                            <div className="h-0.5 bg-[#E48A57] scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+                        </motion.a>
+                    ))}
+
+                    <motion.a 
+                        href="#contact" 
+                        onClick={handleScroll}
+                        className="flex items-center space-x-2 text-white/70 hover:text-[#98B4CE] transition-colors group"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <MousePointerClick className="w-5 h-5" />
+                        <span>Contact</span>
+                    </motion.a>
+                </div>
+
+                {/* Mobile Menu Toggle */}
+                <motion.button 
+                    onClick={toggleNav}
+                    className="md:hidden absolute top-4 right-4 text-white/70 z-50"
+                    whileTap={{ scale: 0.9 }}
+                >
+                    {nav ? <X size={30} /> : <Menu size={30} />}
+                </motion.button>
+
+                {/* Mobile Navigation */}
+                <AnimatePresence>
+                    {nav && (
+                        <motion.div 
+                            initial={{ x: '100%' }}
+                            animate={{ x: 0 }}
+                            exit={{ x: '100%' }}
+                            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            className="fixed inset-0 bg-black z-40 flex flex-col justify-center items-center"
+                        >
+                            <div className="space-y-8 text-center">
+                                {navLinks.map((link, index) => (
+                                    <motion.a
+                                        key={index}
+                                        href={link.path}
+                                        onClick={handleScroll}
+                                        initial="hidden"
+                                        animate="visible"
+                                        variants={linkVariants}
+                                        className="block text-4xl text-white/70 hover:text-[#E48A57] transition-colors"
+                                    >
+                                        {link.title}
+                                    </motion.a>
+                                ))}
+                                <motion.a
+                                    href="#contact"
+                                    onClick={handleScroll}
+                                    initial="hidden"
+                                    animate="visible"
+                                    variants={linkVariants}
+                                    className="block text-4xl text-white/70 hover:text-[#98B4CE] transition-colors"
+                                >
+                                    Contact
+                                </motion.a>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+        </nav>
     )
 }
 
