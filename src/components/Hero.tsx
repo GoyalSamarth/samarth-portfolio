@@ -9,7 +9,7 @@ const Hero =() => {
     return (
         <div className="py-24 relative overflow-clip bg-[linear-gradient(to_bottom,#000,#2B1942_35%,#8F5C55_60%,#DBAF6F_80%)] "> 
 
-        <div className="absolute rounded-[50%] w-[3000px] h-[800px]  top-[550] left-[50%] -translate-x-1/2
+        <div className="absolute rounded-[50%] w-[3000px] h-[1300px]  top-[850] left-[50%] -translate-x-1/2
                         bg-[radial-gradient(closest-side,#000_80%,#2B1942)]"   ></div>
 
         <div className="relative">
