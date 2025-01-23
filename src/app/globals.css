@@ -1,0 +1,102 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+@keyframes gradient-xy {
+  0%, 100% {
+    background-position: 0% 50%;
+
+  }
+  50%{
+    background-position: 100% 50%;
+  }
+
+}
+.animate-gradient-xy {
+  animation: gradient-xy 5s ease infinite;
+  background-size: 200% 200%;
+}
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  white-space: nowrap; /* Prevents line breaks */
+  animation: marquee 20s linear infinite; /* Speed can be adjusted by changing 20s */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  white-space: nowrap; /* Prevent line breaks */
+  animation: scroll 20s linear infinite; /* Continuous animation */
+  will-change: transform; /* Optimize for smoothness */
+}
+
+
+
+@keyframes move-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-move-left {
+  animation: move-left 20s linear infinite;
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+
+@keyframes move-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-move-right {
+  animation: move-right 20s linear infinite;
+  display: flex;
+  white-space: nowrap;
+  will-change: transform;
+}
