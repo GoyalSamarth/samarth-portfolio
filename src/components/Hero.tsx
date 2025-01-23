@@ -2,10 +2,10 @@
 import Image from "next/image";
 import cursor from "../assets/icon1.png";
 import lightning from "../assets/icon2.png";
-import { motion } from "framer-motion";
+import { motion  } from "framer-motion";
 import profilepic from "../assets/profilepic.png";
 
-const Hero = () => {
+const Hero =() => {
     return (
         <div className="py-24 relative overflow-clip bg-[linear-gradient(to_bottom,#000,#2B1942_35%,#8F5C55_60%,#DBAF6F_80%)] "> 
 
@@ -19,59 +19,42 @@ const Hero = () => {
             </div>
 
             <motion.div
-                className="hidden md:block absolute left-[280px] top-[170px]"
-                drag
-                animate={{
-                    y: [0, -30, 0],
-                    transition: {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }
-                }}
+            className="hidden md:block absolute left-[280px] top-[170px]"
+            drag
             >
                 <Image
-                    src={cursor}
-                    height="170"
-                    width="170"
-                    alt="cursor"
-                    className=""
-                    draggable="false"
+                src={cursor}
+                height="170"
+                width="170"
+                alt="cursor"
+                className=""
+                draggable="false"
                 />
-            </motion.div>
 
+            </motion.div>
             <motion.div
-                className="hidden md:block absolute right-[220px] top-[20px]"
-                drag
-                animate={{
-                    y: [0, -30, 0],
-                    transition: {
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: 1 // Offset the animation slightly
-                    }
-                }}
+            className="hidden md:block absolute right-[220px] top-[20px]"
+            drag
             >
                 <Image
-                    src={lightning}
-                    height="120"
-                    width="120"
-                    alt="lightning"
-                    className=""
-                    draggable="false"
+                src={lightning}
+                height="120"
+                width="120"
+                alt="lightning"
+                className=""
+                draggable="false"
                 />
+
             </motion.div>
 
-            <p className="text-center text-xl max-w-[500px] mx-auto mt-8 text-white/80">
-                I'm a versatile software developer passionate about building innovative solutions. With experience in creating impactful applications, I love turning ideas into reality through technology.
-            </p>
+        <p className="text-center text-xl max-w-[500px] mx-auto mt-8 text-white/80">
+        I’m a versatile software developer passionate about building innovative solutions. With experience in creating impactful applications, I love turning ideas into reality through technology.
+        </p>
 
-            <Image
-                src={profilepic}
-                alt="profile picture"
-                className="h-auto w-auto mx-auto"
-            />
+        <Image
+        src={profilepic}
+        alt="profile picture"
+        className="h-auto w-auto mx-auto"/>
         </div>
 
         </div>
